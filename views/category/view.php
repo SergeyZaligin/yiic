@@ -2,7 +2,6 @@
 use app\components\MenuWidget;
 use yii\helpers\Html;
 
-$this->title = 'Catalog';
 ?>
 
         <section id="advertisement">
@@ -54,7 +53,7 @@ $this->title = 'Catalog';
                     <div class="col-sm-9 padding-right">
                         <?php if(!empty($products)) : ?>
                         <div class="features_items"><!--features_items-->
-                            <h2 class="title text-center">Features Items</h2>
+                            <h2 class="title text-center"><?=$categoryTitle['name'];?></h2>
                             
                             <?php foreach ($products as $product) : ?>
                             <div class="col-sm-4">

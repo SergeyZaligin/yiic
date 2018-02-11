@@ -4,7 +4,6 @@
 use app\components\MenuWidget;
 use yii\helpers\Html;
 
-$this->title = 'Category index';
 ?>
 <section id="slider"><!--slider-->
     <div class="container">

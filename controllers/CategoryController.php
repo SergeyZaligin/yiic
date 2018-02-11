@@ -24,6 +24,8 @@ class CategoryController extends AppController
         
         $hits = $product->getProductHit();
         
+        $this->setMetaTags('Главная страница', 'Магазин одежды', 'купить недорого, одежда');
+        
         return $this->render('index', compact('hits'));
     }
     
@@ -32,10 +34,14 @@ class CategoryController extends AppController
         $id = Yii::$app->request->get('id');
         
         $product = new Product();
+        $category = new Category();
         
         $products = $product->getProductById($id);
         
+        $categoryTitle = $category->getCategory($id);
+        
+        $this->setMetaTags($categoryTitle->name, $categoryTitle->keywords, $categoryTitle->description);
         //ninja($products);
-        return $this->render('view', compact('products'));
+        return $this->render('view', compact('products', 'categoryTitle'));
     }
 }
