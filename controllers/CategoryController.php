@@ -14,14 +14,28 @@ use app\models\Product;
  */
 class CategoryController extends AppController
 {
+    /**
+     * Index page
+     * @return type
+     */
     public function actionIndex()
     {
         $product = new Product();
         
         $hits = $product->getProductHit();
         
-        //ninja($n);
-        
         return $this->render('index', compact('hits'));
+    }
+    
+    public function actionView() 
+    {
+        $id = Yii::$app->request->get('id');
+        
+        $product = new Product();
+        
+        $products = $product->getProductById($id);
+        
+        //ninja($products);
+        return $this->render('view', compact('products'));
     }
 }
