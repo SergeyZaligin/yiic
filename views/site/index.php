@@ -1,6 +1,8 @@
 <?php
 /* @var $this yii\web\View */
 
+use app\components\MenuWidget;
+
 $this->title = 'Главная страница';
 ?>
 <section id="slider"><!--slider-->
@@ -74,7 +76,8 @@ $this->title = 'Главная страница';
             <div class="col-sm-3">
                 <div class="left-sidebar">
                     <h2>Category</h2>
-                    <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                    <?= MenuWidget::widget(); ?>
+<!--                    <div class="panel-group category-products" id="accordian">category-productsr
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 <h4 class="panel-title">
@@ -179,7 +182,7 @@ $this->title = 'Главная страница';
                                 <h4 class="panel-title"><a href="#">Shoes</a></h4>
                             </div>
                         </div>
-                    </div><!--/category-products-->
+                    </div>/category-products-->
 
                     <div class="brands_products"><!--brands_products-->
                         <h2>Brands</h2>
