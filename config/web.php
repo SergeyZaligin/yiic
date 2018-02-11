@@ -50,6 +50,7 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 //'' => 'site/index',
+                'category/<id:\d+>/page/<page:\d+>' => 'category/view',
                 'category/<id:\d+>' => 'category/view',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
