@@ -1,5 +1,9 @@
 /*price range*/
 
+$('.catalog').dcAccordion({
+    speed: 300
+});
+
  $('#sl2').slider();
 
 	var RGBChange = function() {
