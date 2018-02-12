@@ -22,11 +22,13 @@ class ProductController extends AppController
         $product = new Product();
         $category = new Category();
         
-        $this->setMetaTags($categoryTitle->name, $categoryTitle->keywords, $categoryTitle->description);
+        $productItem = $product->getProductById($id);
         
-        ninja($id);
+        $this->setMetaTags($productItem->name, $productItem->keywords, $productItem->description);
+        
+        //ninja($productItem);
        
-        return $this->render('view', compact('products','pages', 'categoryTitle'));
+        return $this->render('view', compact('productItem'));
     }
 
 }
