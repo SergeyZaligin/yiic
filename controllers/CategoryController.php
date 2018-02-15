@@ -24,6 +24,11 @@ class CategoryController extends AppController
         
         $hits = $product->getProductHit();
         
+        if(empty($hits))
+        {
+            throw new \yii\web\HttpException(404, 'Такой категории нет.');
+        }
+        
         $this->setMetaTags('Главная страница', 'Магазин одежды', 'купить недорого, одежда');
         
         return $this->render('index', compact('hits'));
@@ -49,6 +54,11 @@ class CategoryController extends AppController
         
         
         $categoryTitle = $category->getCategory($id);
+        
+        if(empty($categoryTitle))
+        {
+            throw new \yii\web\HttpException(404, 'Такой категории нет.');
+        }
         
         $this->setMetaTags($categoryTitle->name, $categoryTitle->keywords, $categoryTitle->description);
         //ninja($products);

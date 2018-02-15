@@ -40,6 +40,11 @@ class Product  extends ActiveRecord
         return Product::find()->where(['category_id' => $id]);
     }
     
+    public function getProductsBySql($query) 
+    {
+        return Product::find()->where(['like', 'name', $query]);
+    }
+    
     public function getProductById($id) 
     {
         // Ленивая загрузка

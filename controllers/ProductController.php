@@ -26,6 +26,16 @@ class ProductController extends AppController
         
         $recommendedProducts = $product->getProductHit();
         
+        if(empty($productItem))
+        {
+            throw new \yii\web\HttpException(404, 'Данного продукта несуществует.');
+        }
+        
+        if(empty($recommendedProducts))
+        {
+            throw new \yii\web\HttpException(404, 'Данного продукта несуществует.');
+        }
+        
         $this->setMetaTags($productItem->name, $productItem->keywords, $productItem->description);
         
         //ninja($productItem);
