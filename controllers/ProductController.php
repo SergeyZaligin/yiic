@@ -24,11 +24,13 @@ class ProductController extends AppController
         
         $productItem = $product->getProductById($id);
         
+        $recommendedProducts = $product->getProductHit();
+        
         $this->setMetaTags($productItem->name, $productItem->keywords, $productItem->description);
         
         //ninja($productItem);
        
-        return $this->render('view', compact('productItem'));
+        return $this->render('view', compact('productItem', 'recommendedProducts'));
     }
 
 }
