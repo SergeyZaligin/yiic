@@ -10,7 +10,7 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\LtAppAsset;
 use yii\helpers\Url;
-
+use yii\bootstrap\Modal;
 
 AppAsset::register($this);
 LtAppAsset::register($this);
@@ -103,7 +103,7 @@ LtAppAsset::register($this);
                                     <li><a href="#"><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="#" id="header-cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
@@ -319,7 +319,18 @@ LtAppAsset::register($this);
 
         </footer><!--/Footer-->
 
+<?php 
+    Modal::begin([
+        'id' => 'cart',
+        'size' => 'modal-lg',
+        'header' => '<h2>Корзина</h2>',
+        'footer' => '<button type="button" class="btn btn-default" data-dismiss="modal">Продолжить покупки</button>
+        <button type="button" class="btn btn-success">Оформить заказ</button>
+        <button type="button" class="btn btn-danger clear-cart">Очистить карзину</button>'
+    ]);
 
+    Modal::end();
+?>
 
         <?php $this->endBody() ?>    
     </body>

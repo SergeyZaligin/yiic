@@ -22,6 +22,10 @@ outline: none;
 text-decoration:none;
 }
 
+.del-item{
+    cursor: pointer;
+}
+
 a:focus {
   outline:none;
   outline-offset: 0;

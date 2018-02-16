@@ -1,5 +1,8 @@
 /*price range*/
 
+
+//console.log();
+
 $('.catalog').dcAccordion({
     speed: 300
 });
@@ -13,6 +16,86 @@ $('.catalog').dcAccordion({
 /*scroll to top*/
 
 $(document).ready(function(){
+    
+     function getCart(e){
+         e.preventDefault();
+          $.ajax({
+            url: 'cart/show',
+            type: 'GET',
+            success: function(res){
+                if(!res) alert('Error!!!');
+                showCart(res);
+            },
+            error: function(){
+                alert('Error');
+            }
+        });
+     }
+     
+     $('#header-cart').on('click', getCart);
+    
+     $('#cart .modal-body').on('click', '.del-item', function(){
+         var id = $(this).data('id');
+         
+         /**
+          * Передаем данные на сервер
+          */
+         $.ajax({
+            url: 'cart/del-item',
+            data: {id: id},
+            type: 'GET',
+            success: function(res){
+                if(!res) alert('Error!!!');
+                showCart(res);
+            },
+            error: function(){
+                alert('Error');
+            }
+        });
+     });
+    
+     $('.clear-cart').on('click', clearCart);
+    
+     function clearCart(){
+         
+          $.ajax({
+            url: 'cart/clear',
+            type: 'GET',
+            success: function(res){
+                if(!res) alert('Error!!!');
+                showCart(res);
+            },
+            error: function(){
+                alert('Error');
+            }
+        });
+        
+     }
+    
+     function showCart(cart){
+         $('#cart .modal-body').html(cart);
+         $('#cart').modal();
+     }
+    
+    $('.add-to-cart').on('click', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        
+        $.ajax({
+            url: 'cart/add',
+            data: {id: id},
+            type: 'GET',
+            success: function(res){
+                if(!res) alert('Error!!!');
+                showCart(res);
+            },
+            error: function(){
+                alert('Error');
+            }
+        });
+    });
+
+    
 	$(function () {
 		$.scrollUp({
 	        scrollName: 'scrollUp', // Element ID
