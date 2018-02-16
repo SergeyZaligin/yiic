@@ -20,7 +20,7 @@ $(document).ready(function(){
      function getCart(e){
          e.preventDefault();
           $.ajax({
-            url: 'cart/show',
+            url: '/cart/show',
             type: 'GET',
             success: function(res){
                 if(!res) alert('Error!!!');
@@ -41,7 +41,7 @@ $(document).ready(function(){
           * Передаем данные на сервер
           */
          $.ajax({
-            url: 'cart/del-item',
+            url: '/cart/del-item',
             data: {id: id},
             type: 'GET',
             success: function(res){
@@ -59,7 +59,7 @@ $(document).ready(function(){
      function clearCart(){
          
           $.ajax({
-            url: 'cart/clear',
+            url: '/cart/clear',
             type: 'GET',
             success: function(res){
                 if(!res) alert('Error!!!');
@@ -76,14 +76,21 @@ $(document).ready(function(){
          $('#cart .modal-body').html(cart);
          $('#cart').modal();
      }
-    
+     
+    /**
+    * Передаем данные на сервер
+    */
     $('.add-to-cart').on('click', function(e){
         e.preventDefault();
-        var id = $(this).data('id');
+        var id = $(this).data('id'),
+           qty = $('#qty').val();
         
         $.ajax({
-            url: 'cart/add',
-            data: {id: id},
+            url: '/cart/add',
+            data: {
+                id: id,
+                qty: qty
+            },
             type: 'GET',
             success: function(res){
                 if(!res) alert('Error!!!');
