@@ -71,6 +71,16 @@ $config = [
             ],
         ],
     ],
+    'controllerMap' => [
+        'elfinder' => [
+                'class' => 'mihaildev\elfinder\PathController',
+                'access' => ['@'],
+                'root' => [
+                    'path' => 'upload/global',
+                    'name' => 'Global'
+                ]
+	]
+    ],
     'params' => $params,
 ];
 

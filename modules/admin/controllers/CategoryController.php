@@ -67,7 +67,8 @@ class CategoryController extends Controller
         $model = new Category();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-                            Yii::$app->session->setFlash('success', 'Ваш заказ принят. Наш менеджер скоро свяжеться с Вами.');
+            
+        Yii::$app->session->setFlash('success', 'Категория успешно создана.');
 
             return $this->redirect(['view', 'id' => $model->id]);
         }
