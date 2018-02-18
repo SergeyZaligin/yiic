@@ -17,7 +17,9 @@ class MenuWidget extends Widget
     public $data;
     public $tree;
     public $menuHTML;
-    
+    public $model;
+
+
     /**
      * Init widget
      */
@@ -39,12 +41,14 @@ class MenuWidget extends Widget
      */
     public function run() 
     {
-        
-        $menu = Yii::$app->cache->get('menu');
-        
-        if($menu)
+        if($this->tpl == 'menu.php')
         {
-            return $menu;
+            $menu = Yii::$app->cache->get('menu');
+        
+            if($menu)
+            {
+                return $menu;
+            }
         }
         
         $this->data = Category::find()->indexBy('id')->asArray()->all();
@@ -53,7 +57,11 @@ class MenuWidget extends Widget
         
         $this->menuHTML = $this->getMenuHtml($this->tree);
         
-        Yii::$app->cache->set('menu', $this->menuHTML, 60);
+        if($this->tpl == 'menu.php')
+        {
+            Yii::$app->cache->set('menu', $this->menuHTML, 60);
+        }
+        
         
         return $this->menuHTML;
     }
@@ -81,19 +89,19 @@ class MenuWidget extends Widget
         return $tree;
     }
     
-    protected function getMenuHtml($tree)
+    protected function getMenuHtml($tree, $tab='')
     {
         $str = '';
         
         foreach ($tree as $category) 
         {
-            $str .= $this->catToTemplate($category);
+            $str .= $this->catToTemplate($category, $tab);
         }
         
         return $str;
     }
 
-    protected function catToTemplate($category)
+    protected function catToTemplate($category, $tab)
     {
         ob_start();
         

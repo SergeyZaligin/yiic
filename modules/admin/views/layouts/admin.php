@@ -11,7 +11,6 @@ use app\assets\AppAsset;
 use app\assets\LtAppAsset;
 use yii\helpers\Url;
 use yii\bootstrap\Modal;
-
 AppAsset::register($this);
 LtAppAsset::register($this);
 ?>
@@ -28,7 +27,7 @@ LtAppAsset::register($this);
         <meta name="author" content="">   
 
         <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
+        <title>Админка / <?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
 
 
@@ -108,7 +107,7 @@ LtAppAsset::register($this);
                                     <li><a href="#"><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                                     <li><a href="#" id="header-cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                                    <li><a href="<?= Url::to(['/admin']); ?>"><i class="fa fa-lock"></i> Login</a></li>
+                                    <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -130,7 +129,7 @@ LtAppAsset::register($this);
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="index.html" class="active">Home</a></li>
+                                    <li><a href="<?= Url::to(['/admin']); ?>" class="active">Home</a></li>
                                     <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
                                             <li><a href="shop.html">Products</a></li>
@@ -140,14 +139,17 @@ LtAppAsset::register($this);
                                             <li><a href="login.html">Login</a></li> 
                                         </ul>
                                     </li> 
-                                    <li class="dropdown"><a href="#">Blog<i class="fa fa-angle-down"></i></a>
+                                    <li class="dropdown"><a href="#">Категории<i class="fa fa-angle-down"></i></a>
                                         <ul role="menu" class="sub-menu">
-                                            <li><a href="blog.html">Blog List</a></li>
-                                            <li><a href="blog-single.html">Blog Single</a></li>
+                                            <li>
+                                                <a href="<?= Url::to(['category/index']); ?>">Список категорий</a>
+                                            </li>
+                                            <li>
+                                                <a href="<?= Url::to(['category/create']); ?>">Добавить категорию</a>
+                                            </li>
                                         </ul>
                                     </li> 
-                                    <li><a href="404.html">404</a></li>
-                                    <li><a href="contact-us.html">Contact</a></li>
+                        
                                 </ul>
                             </div>
                         </div>
@@ -162,8 +164,23 @@ LtAppAsset::register($this);
                 </div>
             </div><!--/header-bottom-->
         </header><!--/header-->
+        <div class="container"> 
+            <?php if( Yii::$app->session->hasFlash('success') ): ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('success'); ?>
+        </div>
+    <?php endif;?>
 
-        <?= $content ?>
+    <?php if( Yii::$app->session->hasFlash('error') ): ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <?php echo Yii::$app->session->getFlash('error'); ?>
+        </div>
+    <?php endif;?>
+                                                <?= $content ?>
+        </div>
+       
 
         <footer id="footer"><!--Footer-->
             <div class="footer-top">

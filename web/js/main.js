@@ -17,6 +17,27 @@ $('.catalog').dcAccordion({
 
 $(document).ready(function(){
     
+//    $('#category-parent_id').on('change', function(){
+//        var id = $('#category-parent_id').val();
+//        
+//        console.log($('#category-parent_id').val());
+//        
+//        $.ajax({
+//            url: '/admin/category/update',
+//            type: 'GET',
+//            data: {id: id},
+//            success: function(res){
+//                if(!res) alert('Error!!!');
+//                console.log(id);
+//            },
+//            error: function(){
+//                alert('Error');
+//            }
+//        });
+//        
+//    });
+    
+    
      function getCart(e){
          e.preventDefault();
           $.ajax({

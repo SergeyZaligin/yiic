@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Feb 11, 2018 at 10:00 AM
+-- Generation Time: Feb 18, 2018 at 06:50 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.8
 
@@ -60,7 +60,7 @@ INSERT INTO `category` (`id`, `parent_id`, `name`, `keywords`, `description`) VA
 (17, 2, 'Chanel', NULL, NULL),
 (18, 2, 'Gucci', NULL, NULL),
 (19, 3, 'Fendi', NULL, NULL),
-(20, 3, 'Guess', NULL, NULL),
+(20, 12, 'Guess', '', ''),
 (21, 3, 'Valentino', NULL, NULL),
 (22, 3, 'Dior', NULL, NULL),
 (23, 3, 'Versace', NULL, NULL),
@@ -70,7 +70,86 @@ INSERT INTO `category` (`id`, `parent_id`, `name`, `keywords`, `description`) VA
 (27, 0, 'Interiors', NULL, NULL),
 (28, 0, 'Clothing', NULL, NULL),
 (29, 0, 'Bags', 'сумки ключевики...', 'сумки описание...'),
-(30, 0, 'Shoes', NULL, NULL);
+(30, 0, 'Shoes', NULL, NULL),
+(31, 0, 'Spb', 'piter', 'go'),
+(32, 31, 'Frunza', '', ''),
+(33, 0, 'wweee', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order`
+--
+
+CREATE TABLE `order` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `qty` int(10) NOT NULL,
+  `sum` float NOT NULL,
+  `status` enum('0','1') NOT NULL DEFAULT '0',
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `phone` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order`
+--
+
+INSERT INTO `order` (`id`, `created_at`, `updated_at`, `qty`, `sum`, `status`, `name`, `email`, `phone`, `address`) VALUES
+(14, '2018-02-16 17:53:06', '2018-02-16 17:53:06', 2, 76, '1', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(15, '2018-02-16 17:57:41', '2018-02-16 17:57:41', 1, 56, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(16, '2018-02-16 18:22:05', '2018-02-16 18:22:05', 1, 56, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(17, '2018-02-16 18:23:04', '2018-02-16 18:23:04', 2, 76, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(18, '2018-02-16 18:24:05', '2018-02-16 18:24:05', 2, 76, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(20, '2018-02-17 11:32:31', '2018-02-17 11:32:31', 1, 56, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(21, '2018-02-17 11:33:00', '2018-02-17 11:33:00', 4, 170, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(22, '2018-02-17 11:33:42', '2018-02-17 11:33:42', 1, 56, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(23, '2018-02-17 11:33:57', '2018-02-17 11:33:57', 1, 20, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(24, '2018-02-17 11:34:11', '2018-02-17 11:34:11', 1, 70, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke'),
+(25, '2018-02-17 11:34:26', '2018-02-17 11:34:26', 1, 0, '0', 'SuslikEst', 'mail@mail.ru', '+79110071894', 'Na derevniy k dedyshke');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_items`
+--
+
+CREATE TABLE `order_items` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `order_id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` float NOT NULL,
+  `qty_item` int(11) NOT NULL,
+  `sum_item` float NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `order_items`
+--
+
+INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `price`, `qty_item`, `sum_item`) VALUES
+(2, 14, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(3, 14, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
+(4, 15, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(5, 16, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(6, 17, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(7, 17, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
+(8, 18, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(9, 18, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
+(10, 19, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
+(11, 20, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(12, 21, 6, 'Кардиган Levi\'s Icy Grey Heather M', 100, 1, 100),
+(13, 21, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0),
+(14, 21, 7, 'Кардиган ONLY ON 15102048 M Black Tan/Partridg', 0, 1, 0),
+(15, 21, 4, 'Блуза Tom Tailor TT 20312490071 7610 M Зелёная', 70, 1, 70),
+(16, 22, 2, 'Джинсы MR520 MR 227 20002 0115 29-34 р Синие', 56, 1, 56),
+(17, 23, 3, 'Блуза Mango 53005681-05 M Бежевая', 20, 1, 20),
+(18, 24, 4, 'Блуза Tom Tailor TT 20312490071 7610 M Зелёная', 70, 1, 70),
+(19, 25, 5, 'Блузка Kira Plastinina 17-16-17453-SM-29 S', 0, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -112,6 +191,26 @@ INSERT INTO `product` (`id`, `category_id`, `name`, `content`, `price`, `keyword
 (13, 29, 'Cумка Michael Kors Bedford Красная', '\r\n\r\nОсобенность стиля Michael Kors заключается в том, что простота его коллекций гармонирует с роскошью. Этому дизайнеру под силу объединить американский утилитаризм в манере одеваться с европейской изысканностью и шармом. Все его работы отличает изящная утонченность, которая рождается из строгих, почти примитивных линий. Все аксессуары поддерживают общий стиль человека с безупречным вкусом.\r\n\r\nМодели Michael Kors могут оставаться оригинальными, стильными и неотразимыми в течение многих лет, что особо важно для покупательниц, не желающих постоянно обновлять свой гардероб.', 0, NULL, NULL, 'no-image.png', '0', '0', '0'),
 (14, 29, 'Cумка Michael Kors JS Travel Светло-розовая', '\r\n\r\nОсобенность стиля Michael Kors заключается в том, что простота его коллекций гармонирует с роскошью. Этому дизайнеру под силу объединить американский утилитаризм в манере одеваться с европейской изысканностью и шармом. Все его работы отличает изящная утонченность, которая рождается из строгих, почти примитивных линий. Все аксессуары поддерживают общий стиль человека с безупречным вкусом.\r\n\r\nМодели Michael Kors могут оставаться оригинальными, стильными и неотразимыми в течение многих лет, что особо важно для покупательниц, не желающих постоянно обновлять свой гардероб.', 0, NULL, NULL, 'no-image.png', '0', '0', '0');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user`
+--
+
+CREATE TABLE `user` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `auth_key` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id`, `username`, `password`, `auth_key`) VALUES
+(1, 'admin', '$2y$13$dEy7E.25d9KgR0Cl.YU0YuzQo/qAO/He6GaAZ9wGSW7k4iCOxNagy', 'vjLxkAb76AlTxFLS6ZOkZDncHS8IssBY');
+
 --
 -- Indexes for dumped tables
 --
@@ -123,9 +222,27 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `order`
+--
+ALTER TABLE `order`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `order_items`
+--
+ALTER TABLE `order_items`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -136,12 +253,27 @@ ALTER TABLE `product`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+--
+-- AUTO_INCREMENT for table `order`
+--
+ALTER TABLE `order`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+--
+-- AUTO_INCREMENT for table `order_items`
+--
+ALTER TABLE `order_items`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
